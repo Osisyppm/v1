@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="id" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TPQ AT-TANWIR</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co.com/WN0FHPmM/logo-TPQ-AT-TANWIR-PNG.png" />
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="/_sdk/element_sdk.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1B5E20",
+              secondary: "#388E3C",
+              accent: "#FFD54F",
+              dark: "#0D2E10",
+              cream: "#F5F5DC",
+            },
+            fontFamily: {
+              arabic: ["Amiri", "serif"],
+              sans: ["Poppins", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      .main-wrapper {
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1b5e20;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #ffd54f;
+        border-radius: 4px;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes shimmer {
+        0% {
+          background-position: -200% 0;
+        }
+        100% {
+          background-position: 200% 0;
+        }
+      }
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(255, 213, 79, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(255, 213, 79, 0.6);
+        }
+      }
+
+      .animate-fade-in-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+      .animate-pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+
+      .delay-100 {
+        animation-delay: 0.1s;
+      }
+      .delay-200 {
+        animation-delay: 0.2s;
+      }
+      .delay-300 {
+        animation-delay: 0.3s;
+      }
+      .delay-400 {
+        animation-delay: 0.4s;
+      }
+      .delay-500 {
+        animation-delay: 0.5s;
+      }
+
+      /* Gradient text */
+      .gradient-text {
+        background: linear-gradient(135deg, #ffd54f 0%, #fff8e1 50%, #ffd54f 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 3s linear infinite;
+      }
+
+      /* Islamic pattern background */
+      .islamic-pattern {
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M30 0L60 30L30 60L0 30z M30 10L50 30L30 50L10 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+
+      /* Card hover effects */
+      .card-hover {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .card-hover:hover {
+        transform: translateY(-8px) scale(1.02);
+      }
+
+      /* Navigation styles */
+      .nav-link {
+        position: relative;
+        transition: all 0.3s ease;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: #ffd54f;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      /* Form styles */
+      .form-input {
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+      .form-input:focus {
+        border-color: #388e3c;
+        box-shadow: 0 0 0 4px rgba(56, 142, 60, 0.1);
+      }
+
+      /* Decorative elements */
+      .ornament {
+        position: absolute;
+        opacity: 0.1;
+      }
+
+      /* Toast notification */
+      .toast {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 16px 24px;
+        border-radius: 12px;
+        color: white;
+        font-weight: 500;
+        z-index: 1000;
+        transform: translateX(120%);
+        transition: transform 0.4s ease;
+      }
+      .toast.show {
+        transform: translateX(0);
+      }
+      .toast.success {
+        background: linear-gradient(135deg, #1b5e20, #388e3c);
+      }
+      .toast.error {
+        background: linear-gradient(135deg, #c62828, #e53935);
+      }
+    </style>
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  </head>
+  <body class="h-full bg-cream font-sans">
+    <div class="main-wrapper">
+      <!-- Navigation -->
+      <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-20">
+            <!-- Logo -->
+            <a href="#beranda" class="flex items-center space-x-3 group">
+              <img
+                src="https://i.ibb.co.com/WN0FHPmM/logo-TPQ-AT-TANWIR-PNG.png"
+                alt="Logo TPQ AT-TANWIR"
+                class="h-12 w-12 object-contain transition-transform duration-300 group-hover:scale-110"
+                loading="lazy"
+                onerror="
+                  console.error('Image failed to load:', this.src);
+                  this.style.background = '#1B5E20';
+                  this.alt = 'Logo';
+                "
+              />
+              <span id="nav-title" class="text-xl font-bold text-white hidden sm:block">TPQ AT-TANWIR</span>
+            </a>
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8">
+              <a href="#beranda" class="nav-link text-white font-medium hover:text-accent">Beranda</a> <a href="#sambutan" class="nav-link text-white font-medium hover:text-accent">Sambutan</a>
+              <a href="#program" class="nav-link text-white font-medium hover:text-accent">Program</a> <a href="#pendaftaran" class="nav-link text-white font-medium hover:text-accent">Pendaftaran</a>
+              <a href="#kontak" class="nav-link text-white font-medium hover:text-accent">Kontak</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-white hover:bg-white/10 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+          <!-- Mobile Menu -->
+          <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <div class="flex flex-col space-y-3 bg-dark/90 backdrop-blur-lg rounded-2xl p-4 mt-2">
+              <a href="#beranda" class="text-white font-medium py-2 px-4 rounded-lg hover:bg-white/10 transition-colors">Beranda</a>
+              <a href="#sambutan" class="text-white font-medium py-2 px-4 rounded-lg hover:bg-white/10 transition-colors">Sambutan</a>
+              <a href="#program" class="text-white font-medium py-2 px-4 rounded-lg hover:bg-white/10 transition-colors">Program</a>
+              <a href="#pendaftaran" class="text-white font-medium py-2 px-4 rounded-lg hover:bg-white/10 transition-colors">Pendaftaran</a>
+              <a href="#kontak" class="text-white font-medium py-2 px-4 rounded-lg hover:bg-white/10 transition-colors">Kontak</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <!-- Hero Section -->
+      <section id="beranda" class="relative min-h-screen flex items-center justify-center overflow-hidden islamic-pattern bg-gradient-to-br from-dark via-primary to-secondary">
+        <!-- Decorative circles -->
+        <div class="absolute top-20 left-10 w-72 h-72 bg-accent/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-secondary/20 rounded-full blur-3xl"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Text Content -->
+            <div class="text-center lg:text-left">
+              <p class="text-accent font-arabic text-2xl mb-4 animate-fade-in-up opacity-0" style="animation-delay: 0.1s">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+              <h1 id="hero-title" class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up opacity-0" style="animation-delay: 0.2s">TPQ <span class="gradient-text">AT-TANWIR</span></h1>
+              <p class="text-lg sm:text-xl text-white/80 mb-8 animate-fade-in-up opacity-0 leading-relaxed" style="animation-delay: 0.3s">Membentuk Generasi Qur'ani yang Berakhlakul Karimah, Berilmu, dan Bertakwa kepada Allah SWT</p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up opacity-0" style="animation-delay: 0.4s">
+                <a href="#pendaftaran" class="inline-flex items-center justify-center px-8 py-4 bg-accent text-dark font-semibold rounded-full hover:bg-yellow-400 transition-all duration-300 hover:scale-105 shadow-lg animate-pulse-glow">
+                  <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  </svg>
+                  Daftar Sekarang
+                </a>
+                <a href="#program" class="inline-flex items-center justify-center px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 hover:scale-105">
+                  <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                    />
+                  </svg>
+                  Lihat Program
+                </a>
+              </div>
+            </div>
+            <!-- Image -->
+            <div class="relative animate-fade-in-up opacity-0" style="animation-delay: 0.5s">
+              <div class="relative animate-float">
+                <div class="absolute inset-0 bg-gradient-to-br from-accent/30 to-secondary/30 rounded-full blur-3xl"></div>
+                <img
+                  src="https://i.ibb.co.com/MyZKYpDD/removebg-preview.png"
+                  alt="Santri TPQ AT-TANWIR"
+                  class="relative z-10 w-full max-w-lg mx-auto drop-shadow-2xl"
+                  loading="lazy"
+                  onerror="
+                    console.error('Image failed to load:', this.src);
+                    this.style.background = 'linear-gradient(135deg, #1B5E20, #388E3C)';
+                    this.alt = 'Santri TPQ';
+                  "
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <a href="#sambutan" class="text-white/60 hover:text-white transition-colors">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg
+          ></a>
+        </div>
+      </section>
+      <!-- Sambutan Section -->
+      <section id="sambutan" class="py-20 lg:py-32 bg-white relative overflow-hidden">
+        <!-- Decorative pattern -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-accent/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="text-center mb-16">
+            <span class="inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm mb-4">SELAMAT DATANG</span>
+            <h2 id="welcome-title" class="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark">Sambutan <span class="text-primary">Kepala TPQ</span></h2>
+          </div>
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Photo -->
+            <div class="relative group">
+              <div class="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-3xl transform rotate-3 group-hover:rotate-6 transition-transform duration-500"></div>
+              <div class="relative bg-white rounded-3xl p-4 shadow-2xl">
+                <div class="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-cream to-white">
+                  <img
+                    src="https://i.ibb.co.com/DgC9v4DW/Pria-Indonesia-dengan-peci-hijau-1.png"
+                    alt="Ust. Nana Suryana"
+                    class="w-full h-full object-cover object-top"
+                    loading="lazy"
+                    onerror="
+                      console.error('Image failed to load:', this.src);
+                      this.style.background = 'linear-gradient(135deg, #F5F5DC, #E8E8D0)';
+                      this.alt = 'Kepala TPQ';
+                    "
+                  />
+                </div>
+                <div class="absolute -bottom-4 -right-4 bg-accent text-dark px-6 py-3 rounded-2xl shadow-lg">
+                  <p class="font-bold">Ust. Nana Suryana</p>
+                  <p class="text-sm opacity-80">Kepala TPQ AT-TANWIR</p>
+                </div>
+              </div>
+            </div>
+            <!-- Text -->
+            <div class="space-y-6">
+              <div class="inline-flex items-center space-x-2 text-primary">
+                <svg class="w-8 h-8" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
+                  />
+                </svg>
+              </div>
+              <p class="text-lg text-gray-600 leading-relaxed"><span class="font-arabic text-xl text-primary">السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</span></p>
+              <p class="text-gray-600 leading-relaxed">Puji syukur kehadirat Allah SWT yang telah memberikan rahmat dan hidayah-Nya sehingga TPQ AT-TANWIR dapat terus berkembang dalam mendidik generasi Qur'ani.</p>
+              <p class="text-gray-600 leading-relaxed">
+                Kami berkomitmen untuk memberikan pendidikan Al-Qur'an yang berkualitas, membentuk karakter Islami, dan mengembangkan potensi setiap santri. Dengan kurikulum yang komprehensif dan metode pembelajaran yang menyenangkan, kami
+                yakin setiap anak dapat menjadi generasi yang mencintai Al-Qur'an.
+              </p>
+              <p class="text-gray-600 leading-relaxed">Mari bergabung bersama kami dalam perjalanan menghafal dan memahami Al-Qur'an. Semoga Allah SWT senantiasa membimbing langkah kita semua.</p>
+              <p class="font-arabic text-xl text-primary mt-4">وَالسَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Program Section -->
+      <section id="program" class="py-20 lg:py-32 bg-gradient-to-br from-primary via-secondary to-primary islamic-pattern relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="text-center mb-16">
+            <span class="inline-block px-4 py-2 bg-white/20 text-white font-semibold rounded-full text-sm mb-4">KURIKULUM</span>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Program <span class="text-accent">Pendidikan</span></h2>
+            <p class="text-white/80 max-w-2xl mx-auto">Kurikulum komprehensif yang dirancang untuk membentuk generasi Qur'ani berakhlakul karimah</p>
+          </div>
+          <!-- Program Cards -->
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Al-Qur'an -->
+            <div class="card-hover bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
+              <div class="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                <svg class="w-8 h-8 text-dark" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-4">Al-Qur'an</h3>
+              <ul class="space-y-3 text-white/80">
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>IQRO (Khusus tingkat TKA)</span></li>
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Al-Qur'an Muqoddam (Kelas 1 SD / Mengejah)</span></li>
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Al-Qur'an 30 Juz (Kelas 1 SD, 2 SD dst.)</span></li>
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Al-Qur'an Praktek Tajwid (SD, SMP, SMK, Tahasus)</span></li>
+              </ul>
+            </div>
+            <!-- Madrasah -->
+            <div class="card-hover bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
+              <div class="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                <svg class="w-8 h-8 text-dark" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-4">Madrasah AT-TANWIR</h3>
+              <ul class="space-y-3 text-white/80">
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Sistem Kelas (Klasifikasi)</span></li>
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Pelajaran Pokok Al-Qur'an</span></li>
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Kitab Kuning: Aqidah, Akhlak, Fiqih, Tajwid</span></li>
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Sejarah Rosul, Nahwu, Shorof, Bahasa Arab</span></li>
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Kaligrafi</span></li>
+              </ul>
+            </div>
+            <!-- Kajian Kitab Kuning -->
+            <div class="card-hover bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
+              <div class="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                <svg class="w-8 h-8 text-dark" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-4">Kajian Kitab Kuning</h3>
+              <div class="space-y-4 text-white/80 text-sm">
+                <div>
+                  <p class="font-semibold text-accent">AQIDAH:</p>
+                  <p>Aqidatul Awwam / Nurudz Dzolam</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-accent">AKHLAQ:</p>
+                  <p>OPAK, Washiat ASSANUSI, Taisirul Kholaq</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-accent">FIQIH:</p>
+                  <p>Safinatun Naja, Mahrom, Taqrib, Qurrotul Uyun</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-accent">TAJWID &amp; SEJARAH:</p>
+                  <p>Tuhfatul Athfal, Khulashoh Nurul Yaqin</p>
+                </div>
+              </div>
+            </div>
+            <!-- Ekskul -->
+            <div class="card-hover bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
+              <div class="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                <svg class="w-8 h-8 text-dark" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-4">Ekstrakulikuler</h3>
+              <div class="grid grid-cols-2 gap-3 text-white/80">
+                <div class="flex items-center"><span class="w-2 h-2 bg-accent rounded-full mr-2"></span> <span>Tilawah / Qiroat</span></div>
+                <div class="flex items-center"><span class="w-2 h-2 bg-accent rounded-full mr-2"></span> <span>Sholawatan</span></div>
+                <div class="flex items-center"><span class="w-2 h-2 bg-accent rounded-full mr-2"></span> <span>Rebana / Qosidah</span></div>
+                <div class="flex items-center"><span class="w-2 h-2 bg-accent rounded-full mr-2"></span> <span>Kaligrafi</span></div>
+                <div class="flex items-center"><span class="w-2 h-2 bg-accent rounded-full mr-2"></span> <span>Pencak Silat</span></div>
+                <div class="flex items-center"><span class="w-2 h-2 bg-accent rounded-full mr-2"></span> <span>Debaan &amp; Pidato</span></div>
+              </div>
+            </div>
+            <!-- Program Wajib -->
+            <div class="card-hover bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
+              <div class="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                <svg class="w-8 h-8 text-dark" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-4">Program Wajib</h3>
+              <ul class="space-y-3 text-white/80 text-sm">
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Pelaksanaan Sholat Fardu (ISFA)</span></li>
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Istigotsah bersama (Tiap Jumat)</span></li>
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Tadarus Romadon &amp; Harian</span></li>
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Hafalan Juz Amma &amp; Ayat Pilihan</span></li>
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Hafalan Tahlil, Hadoroh &amp; Istigotsah</span></li>
+              </ul>
+            </div>
+            <!-- Kegiatan Tahunan -->
+            <div class="card-hover bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
+              <div class="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                <svg class="w-8 h-8 text-dark" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-4">Kegiatan Tahunan</h3>
+              <ul class="space-y-3 text-white/80">
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Imtihan (Akhir tahun pelajaran)</span></li>
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Khataman Tadarus Al-Qur'an</span></li>
+                <li class="flex items-start"><span class="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span> <span>Khataman Tahfidz Kitab-Kitab</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Pendaftaran Section -->
+      <section id="pendaftaran" class="py-20 lg:py-32 bg-cream relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-primary/10 to-transparent"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="text-center mb-12">
+            <span class="inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm mb-4">BERGABUNG BERSAMA KAMI</span>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark mb-4">Formulir <span class="text-primary">Pendaftaran</span></h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Isi formulir di bawah ini untuk mendaftarkan putra/putri Anda. Data akan dikirim langsung ke sistem kami.</p>
+          </div>
+          <div class="bg-white rounded-3xl shadow-2xl p-8 lg:p-12 relative overflow-hidden">
+            <!-- Decorative corner -->
+            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent/20 to-transparent rounded-bl-full"></div>
+            <form id="registration-form" class="space-y-6 relative z-10">
+              <!-- Personal Info -->
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label for="nama" class="block text-sm font-semibold text-dark mb-2">Nama Lengkap *</label>
+                  <input type="text" id="nama" name="nama" required class="form-input w-full px-4 py-3 rounded-xl bg-cream/50 focus:bg-white outline-none" placeholder="Masukkan nama lengkap" />
+                </div>
+                <div>
+                  <label for="tempat_lahir" class="block text-sm font-semibold text-dark mb-2">Tempat Lahir *</label>
+                  <input type="text" id="tempat_lahir" name="tempat_lahir" required class="form-input w-full px-4 py-3 rounded-xl bg-cream/50 focus:bg-white outline-none" placeholder="Masukkan tempat lahir" />
+                </div>
+              </div>
+              <div>
+                <label for="tanggal_lahir" class="block text-sm font-semibold text-dark mb-2">Tanggal Lahir *</label>
+                <input type="date" id="tanggal_lahir" name="tanggal_lahir" required class="form-input w-full px-4 py-3 rounded-xl bg-cream/50 focus:bg-white outline-none" />
+              </div>
+              <!-- Parents Info -->
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label for="nama_ayah" class="block text-sm font-semibold text-dark mb-2">Nama Ayah *</label>
+                  <input type="text" id="nama_ayah" name="nama_ayah" required class="form-input w-full px-4 py-3 rounded-xl bg-cream/50 focus:bg-white outline-none" placeholder="Masukkan nama ayah" />
+                </div>
+                <div>
+                  <label for="nama_ibu" class="block text-sm font-semibold text-dark mb-2">Nama Ibu *</label>
+                  <input type="text" id="nama_ibu" name="nama_ibu" required class="form-input w-full px-4 py-3 rounded-xl bg-cream/50 focus:bg-white outline-none" placeholder="Masukkan nama ibu" />
+                </div>
+              </div>
+              <!-- Contact Info -->
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label for="telepon" class="block text-sm font-semibold text-dark mb-2">Nomor Telepon Aktif *</label>
+                  <input type="tel" id="telepon" name="telepon" required class="form-input w-full px-4 py-3 rounded-xl bg-cream/50 focus:bg-white outline-none" placeholder="08xxxxxxxxxx" />
+                </div>
+                <div>
+                  <label for="email" class="block text-sm font-semibold text-dark mb-2">Email Aktif *</label>
+                  <input type="email" id="email" name="email" required class="form-input w-full px-4 py-3 rounded-xl bg-cream/50 focus:bg-white outline-none" placeholder="email@example.com" />
+                </div>
+              </div>
+              <!-- File Uploads -->
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label for="akta_kelahiran" class="block text-sm font-semibold text-dark mb-2">Upload Akta Kelahiran *</label>
+                  <div class="relative">
+                    <input type="file" id="akta_kelahiran" name="akta_kelahiran" accept=".pdf,.jpg,.jpeg,.png" required class="hidden" />
+                    <label for="akta_kelahiran" class="flex items-center justify-center w-full px-4 py-3 rounded-xl bg-cream/50 border-2 border-dashed border-gray-300 hover:border-primary cursor-pointer transition-colors">
+                      <svg class="w-6 h-6 text-gray-400 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg
+                      ><span id="akta-filename" class="text-gray-500 text-sm">PDF/Foto (Max 5MB)</span>
+                    </label>
+                  </div>
+                </div>
+                <div>
+                  <label for="kartu_keluarga" class="block text-sm font-semibold text-dark mb-2">Upload Kartu Keluarga *</label>
+                  <div class="relative">
+                    <input type="file" id="kartu_keluarga" name="kartu_keluarga" accept=".pdf,.jpg,.jpeg,.png" required class="hidden" />
+                    <label for="kartu_keluarga" class="flex items-center justify-center w-full px-4 py-3 rounded-xl bg-cream/50 border-2 border-dashed border-gray-300 hover:border-primary cursor-pointer transition-colors">
+                      <svg class="w-6 h-6 text-gray-400 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg
+                      ><span id="kk-filename" class="text-gray-500 text-sm">PDF/Foto (Max 5MB)</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <!-- Submit Button -->
+              <button
+                type="submit"
+                id="submit-btn"
+                class="w-full py-4 px-8 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2"
+              >
+                <span id="submit-text">Kirim Pendaftaran</span>
+                <svg id="submit-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+                <svg id="loading-icon" class="w-5 h-5 animate-spin hidden" fill="none" viewbox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                </svg>
+              </button>
+              <p class="text-center text-sm text-gray-500 mt-4">* Pastikan koneksi internet stabil.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+      <!-- Kontak Section -->
+      <section id="kontak" class="py-20 lg:py-32 bg-dark islamic-pattern relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="text-center mb-16">
+            <span class="inline-block px-4 py-2 bg-white/10 text-accent font-semibold rounded-full text-sm mb-4">HUBUNGI KAMI</span>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Kontak &amp; <span class="text-accent">Lokasi</span></h2>
+            <p class="text-white/70 max-w-2xl mx-auto">Kami siap membantu menjawab pertanyaan Anda tentang TPQ AT-TANWIR</p>
+          </div>
+          <div class="grid lg:grid-cols-2 gap-12">
+            <!-- Contact Cards -->
+            <div class="space-y-6">
+              <!-- WhatsApp -->
+              <a href="https://wa.link/atx7hv" target="_blank" rel="noopener noreferrer" class="card-hover flex items-center p-6 bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 group">
+                <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mr-6 group-hover:scale-110 transition-transform">
+                  <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24">
+                    <path
+                      d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-white mb-1">WhatsApp</h3>
+                  <p class="text-white/70">Klik untuk chat langsung</p>
+                </div>
+                <svg class="w-6 h-6 text-white/50 ml-auto group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg
+              ></a>
+              <!-- Location -->
+              <a href="https://maps.app.goo.gl/PjhWVW7bX2bPapEE7" target="_blank" rel="noopener noreferrer" class="card-hover flex items-center p-6 bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 group">
+                <div class="w-16 h-16 bg-red-500 rounded-2xl flex items-center justify-center mr-6 group-hover:scale-110 transition-transform">
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-white mb-1">Lokasi</h3>
+                  <p class="text-white/70">Lihat di Google Maps</p>
+                </div>
+                <svg class="w-6 h-6 text-white/50 ml-auto group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg
+              ></a>
+              <!-- Info Box -->
+              <div class="p-6 bg-gradient-to-br from-accent/20 to-accent/5 rounded-2xl border border-accent/30">
+                <div class="flex items-start space-x-4">
+                  <div class="w-12 h-12 bg-accent rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-white mb-2">Jam Operasional</h4>
+                    <p class="text-white/70 text-sm">Senin - Minggu: 14:00 - 20:00 WIB</p>
+                    <p class="text-white/70 text-sm">Libur Hari Jum'at</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Map Embed -->
+            <div class="relative">
+              <div class="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-3xl transform rotate-3"></div>
+              <div class="relative bg-white rounded-3xl p-3 shadow-2xl overflow-hidden" style="height: 400px">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.123456789!2d106.123456!3d-6.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zTPQ%20AT-TANWIR!5e0!3m2!1sid!2sid!4v1234567890"
+                  width="100%"
+                  height="100%"
+                  style="border: 0; border-radius: 20px"
+                  allowfullscreen
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                >
+                </iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Footer -->
+      <footer class="bg-dark border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+            <!-- Logo & Name -->
+            <div class="flex items-center space-x-3">
+              <img
+                src="https://i.ibb.co.com/WN0FHPmM/logo-TPQ-AT-TANWIR-PNG.png"
+                alt="Logo TPQ AT-TANWIR"
+                class="h-12 w-12 object-contain"
+                loading="lazy"
+                onerror="
+                  console.error('Image failed to load:', this.src);
+                  this.style.background = '#1B5E20';
+                  this.alt = 'Logo';
+                "
+              />
+              <div>
+                <p class="text-white font-bold">TPQ AT-TANWIR</p>
+                <p class="text-white/50 text-sm">Membentuk Generasi Qur'ani</p>
+              </div>
+            </div>
+            <!-- Social Links -->
+            <div class="flex items-center space-x-4">
+              <a href="https://wa.link/atx7hv" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-green-500 transition-colors">
+                <svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                  /></svg
+              ></a>
+              <a href="https://maps.app.goo.gl/PjhWVW7bX2bPapEE7" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg
+              ></a>
+            </div>
+            <!-- Copyright -->
+            <p id="footer-text" class="text-white/50 text-sm">© 2026 TPQ AT-TANWIR. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+      <!-- Toast Notification -->
+      <div id="toast" class="toast"></div>
+    </div>
+    <script>
+      // Default configuration
+      const defaultConfig = {
+        site_title: "TPQ AT-TANWIR",
+        welcome_title: "Sambutan Kepala TPQ",
+        footer_text: "© 2026 TPQ AT-TANWIR. All rights reserved.",
+        primary_color: "#1B5E20",
+        secondary_color: "#388E3C",
+        accent_color: "#FFD54F",
+        text_color: "#0D2E10",
+        background_color: "#F5F5DC",
+        font_family: "Poppins",
+        font_size: 16,
+      };
+
+      // Initialize Element SDK
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => {
+            // Update site title
+            const navTitle = document.getElementById("nav-title");
+            if (navTitle) navTitle.textContent = config.site_title || defaultConfig.site_title;
+
+            // Update welcome title
+            const welcomeTitle = document.getElementById("welcome-title");
+            if (welcomeTitle) {
+              welcomeTitle.innerHTML = `${config.welcome_title || defaultConfig.welcome_title} <span class="text-primary">Kepala TPQ</span>`;
+            }
+
+            // Update footer text
+            const footerText = document.getElementById("footer-text");
+            if (footerText) footerText.textContent = config.footer_text || defaultConfig.footer_text;
+
+            // Apply colors
+            document.documentElement.style.setProperty("--primary", config.primary_color || defaultConfig.primary_color);
+            document.documentElement.style.setProperty("--accent", config.accent_color || defaultConfig.accent_color);
+
+            // Apply font
+            const font = config.font_family || defaultConfig.font_family;
+            document.body.style.fontFamily = `${font}, Poppins, sans-serif`;
+
+            // Apply font size
+            const baseSize = config.font_size || defaultConfig.font_size;
+            document.documentElement.style.fontSize = `${baseSize}px`;
+          },
+          mapToCapabilities: (config) => ({
+            recolorables: [
+              {
+                get: () => config.background_color || defaultConfig.background_color,
+                set: (value) => window.elementSdk.setConfig({ background_color: value }),
+              },
+              {
+                get: () => config.secondary_color || defaultConfig.secondary_color,
+                set: (value) => window.elementSdk.setConfig({ secondary_color: value }),
+              },
+              {
+                get: () => config.text_color || defaultConfig.text_color,
+                set: (value) => window.elementSdk.setConfig({ text_color: value }),
+              },
+              {
+                get: () => config.primary_color || defaultConfig.primary_color,
+                set: (value) => window.elementSdk.setConfig({ primary_color: value }),
+              },
+              {
+                get: () => config.accent_color || defaultConfig.accent_color,
+                set: (value) => window.elementSdk.setConfig({ accent_color: value }),
+              },
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => config.font_family || defaultConfig.font_family,
+              set: (value) => window.elementSdk.setConfig({ font_family: value }),
+            },
+            fontSizeable: {
+              get: () => config.font_size || defaultConfig.font_size,
+              set: (value) => window.elementSdk.setConfig({ font_size: value }),
+            },
+          }),
+          mapToEditPanelValues: (config) =>
+            new Map([
+              ["site_title", config.site_title || defaultConfig.site_title],
+              ["welcome_title", config.welcome_title || defaultConfig.welcome_title],
+              ["footer_text", config.footer_text || defaultConfig.footer_text],
+            ]),
+        });
+      }
+
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuIcon = document.getElementById("menu-icon");
+      let isMenuOpen = false;
+
+      mobileMenuBtn.addEventListener("click", () => {
+        isMenuOpen = !isMenuOpen;
+        mobileMenu.classList.toggle("hidden");
+        menuIcon.setAttribute("d", isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16");
+      });
+
+      // Close mobile menu when clicking links
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+          isMenuOpen = false;
+          menuIcon.setAttribute("d", "M4 6h16M4 12h16M4 18h16");
+        });
+      });
+
+      // Navbar scroll effect
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("bg-dark/95", "backdrop-blur-lg", "shadow-lg");
+          navbar.classList.remove("bg-transparent");
+        } else {
+          navbar.classList.remove("bg-dark/95", "backdrop-blur-lg", "shadow-lg");
+          navbar.classList.add("bg-transparent");
+        }
+      });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      // File upload handlers
+      document.getElementById("akta_kelahiran").addEventListener("change", function (e) {
+        const filename = e.target.files[0]?.name || "PDF/Foto (Max 5MB)";
+        document.getElementById("akta-filename").textContent = filename.length > 25 ? filename.substring(0, 25) + "..." : filename;
+      });
+
+      document.getElementById("kartu_keluarga").addEventListener("change", function (e) {
+        const filename = e.target.files[0]?.name || "PDF/Foto (Max 5MB)";
+        document.getElementById("kk-filename").textContent = filename.length > 25 ? filename.substring(0, 25) + "..." : filename;
+      });
+
+      // Toast notification function
+      function showToast(message, type = "success") {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.className = `toast ${type}`;
+        setTimeout(() => toast.classList.add("show"), 10);
+        setTimeout(() => toast.classList.remove("show"), 4000);
+      }
+
+      // Form submission handler
+      document.getElementById("registration-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const submitBtn = document.getElementById("submit-btn");
+        const submitText = document.getElementById("submit-text");
+        const submitIcon = document.getElementById("submit-icon");
+        const loadingIcon = document.getElementById("loading-icon");
+
+        // Show loading state
+        submitBtn.disabled = true;
+        submitText.textContent = "Mengirim...";
+        submitIcon.classList.add("hidden");
+        loadingIcon.classList.remove("hidden");
+
+        try {
+          // Collect form data
+          const formData = new FormData(this);
+
+          // Convert files to base64
+          const aktaFile = document.getElementById("akta_kelahiran").files[0];
+          const kkFile = document.getElementById("kartu_keluarga").files[0];
+
+          // Validate file sizes (5MB max)
+          if (aktaFile && aktaFile.size > 5 * 1024 * 1024) {
+            showToast("Ukuran file Akta Kelahiran terlalu besar (max 5MB)", "error");
+            resetButton();
+            return;
+          }
+          if (kkFile && kkFile.size > 5 * 1024 * 1024) {
+            showToast("Ukuran file Kartu Keluarga terlalu besar (max 5MB)", "error");
+            resetButton();
+            return;
+          }
+
+          // Prepare data object
+          const data = {
+            nama: formData.get("nama"),
+            tempat_lahir: formData.get("tempat_lahir"),
+            tanggal_lahir: formData.get("tanggal_lahir"),
+            nama_ayah: formData.get("nama_ayah"),
+            nama_ibu: formData.get("nama_ibu"),
+            telepon: formData.get("telepon"),
+            email: formData.get("email"),
+            timestamp: new Date().toISOString(),
+            akta_kelahiran_base64: "",
+            akta_kelahiran_type: "",
+            kartu_keluarga_base64: "",
+            kartu_keluarga_type: "",
+          };
+
+          // Convert files to base64
+          if (aktaFile) {
+            data.akta_kelahiran_base64 = await fileToBase64(aktaFile);
+            data.akta_kelahiran_type = aktaFile.type;
+          }
+
+          if (kkFile) {
+            data.kartu_keluarga_base64 = await fileToBase64(kkFile);
+            data.kartu_keluarga_type = kkFile.type;
+          }
+
+          // Send to Google Apps Script
+          const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwW_Yg0rjBQWtfYsqeAB39K0Wuo2UKDlX--47IftEwqiUwqPqJYLtBRpVMEep3OacLoBw/exec";
+
+          const response = await fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+
+          showToast("✓ Pendaftaran berhasil dikirim! Kami akan menghubungi Anda segera.", "success");
+          this.reset();
+          document.getElementById("akta-filename").textContent = "PDF/Foto (Max 5MB)";
+          document.getElementById("kk-filename").textContent = "PDF/Foto (Max 5MB)";
+        } catch (error) {
+          console.error("Error:", error);
+          showToast("⚠ Terjadi kesalahan. Silakan coba lagi.", "error");
+        } finally {
+          resetButton();
+        }
+
+        function resetButton() {
+          submitBtn.disabled = false;
+          submitText.textContent = "Kirim Pendaftaran";
+          submitIcon.classList.remove("hidden");
+          loadingIcon.classList.add("hidden");
+        }
+      });
+
+      // Helper function to convert file to base64
+      function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => {
+            const base64String = reader.result.split(",")[1];
+            resolve(base64String);
+          };
+          reader.onerror = (error) => reject(error);
+        });
+      }
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-in-up");
+            entry.target.style.opacity = "1";
+          }
+        });
+      }, observerOptions);
+
+      // Observe all sections
+      document.querySelectorAll("section").forEach((section) => {
+        observer.observe(section);
+      });
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9d116fafb4580af4',t:'MTc3MTYyNjQ5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener) document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState && ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
